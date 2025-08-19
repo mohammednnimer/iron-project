@@ -57,4 +57,7 @@ public class CustResource {
         List<Cust> customers = custService.listAll(limit,page);
         return Response.ok(customers).build();
     }
+
+
+
 }

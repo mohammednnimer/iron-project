@@ -5,9 +5,11 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.gs.dto.IronTypes;
 import org.gs.entity.CustomerTbl;
+import org.gs.entity.IronshapesTbl;
 import org.gs.entity.IrontypesTbl;
 import org.gs.repository.IrontypesTblRepo;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,6 +53,16 @@ public class IrontypesTblService {
 //        return true;
 //    }
 
+    @Transactional
+    public boolean deleteByReference(String txtReference) {
+        IrontypesTbl existing = repo.findByReference(txtReference);
+        if (existing != null) {
+            repo.delete(existing);
+            return true;
+        }
+        return false;
+    }
+
 
 
     public List<IrontypesTbl> searchByrefrences(String txtKey) {
@@ -61,6 +73,12 @@ public class IrontypesTblService {
     {
         return repo.search(GenralSearch,limit,page);
     }
+    public List<IrontypesTbl> searchbyPrice(BigDecimal from , BigDecimal to, int limit, int page)
+    {
+        return repo.findbyprice(from,to,limit,page);
+    }
+
+
 
 
     @Transactional

@@ -6,6 +6,7 @@ import org.gs.entity.IronshapesTbl;
 import org.gs.entity.IrontypesTbl;
 import org.gs.entity.UsersTbl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @ApplicationScoped
@@ -19,6 +20,22 @@ public class IrontypesTblRepo implements PanacheRepository<IrontypesTbl> {
     public List<IrontypesTbl> findBypartofReference(String txtReference) {
         return find("txtReference LIKE ?1", "%" + txtReference + "%").list();
     }
+
+
+
+    public List<IrontypesTbl> findbyprice(BigDecimal from ,BigDecimal to, int limit, int page) {
+        int offset = (page-1) * limit;
+        return find("dblPrice >= ?1 and dblPrice <= ?2", from, to)
+                .range(offset, offset + limit - 1)
+                .list();
+    }
+
+
+
+
+
+
+
 
 
     public List<IrontypesTbl> GetAllIrinType(int limit, int page) {

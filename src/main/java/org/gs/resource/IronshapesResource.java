@@ -72,15 +72,15 @@ public class IronshapesResource {
         return Response.ok(customer).build();
     }
 
-//    @DELETE
-//    @Path("/{txtReference}")
-//    public Response delete(@PathParam("txtReference") String txtReference) {
-//        boolean deleted = ironshapesService.deleteByReference(txtReference);
-//        if (deleted) {
-//            return Response.ok(new org.gs.dto.Response(Msgs.DELETED_SUCCESS)).build();
-//        } else {
-//            return Response.status(Response.Status.NOT_FOUND)
-//                    .entity(new org.gs.dto.Response(Msgs.REFERENCE_NOT_FOUND)).build();
-//        }
-//    }
+    @DELETE
+    @Path("/{txtReference}")
+    public Response delete(@PathParam("txtReference") String txtReference) {
+        boolean deleted = ironshapesService.deleteByReference(txtReference);
+        if (deleted) {
+            return Response.ok(new org.gs.dto.Response(Msgs.DELETED_SUCCESS)).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new org.gs.dto.Response(Msgs.REFERENCE_NOT_FOUND)).build();
+        }
+    }
 }

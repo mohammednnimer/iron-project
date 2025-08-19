@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.gs.entity.IrondepthTbl;
 import org.gs.entity.IronshapesTbl;
+import org.gs.entity.IrontypesTbl;
 import org.gs.repository.IrondepthTblRepo;
 
 import java.util.List;
@@ -43,6 +44,16 @@ public class IrondepthService {
     public List<IrondepthTbl> search(String GenralSearch, int limit , int page)
     {
         return irondepthTblRepo.search(GenralSearch,limit,page);
+    }
+
+    @Transactional
+    public boolean deleteByReference(String txtReference) {
+        IrondepthTbl existing = irondepthTblRepo.findByReference(txtReference);
+        if (existing != null) {
+            irondepthTblRepo.delete(existing);
+            return true;
+        }
+        return false;
     }
 
 

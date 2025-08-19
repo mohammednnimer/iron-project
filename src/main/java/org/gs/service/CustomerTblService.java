@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.QueryParam;
 import org.gs.entity.CustomerTbl;
+import org.gs.entity.IrondepthTbl;
 import org.gs.repository.CustomerTblRepo;
 
 import java.util.List;
@@ -55,5 +56,15 @@ public class CustomerTblService {
     public List<CustomerTbl> search(String GenralSearch, int limit ,int page)
     {
     return customerTblRepo.search(GenralSearch,limit,page);
+    }
+
+    @Transactional
+    public boolean deleteByReference(String txtReference) {
+        CustomerTbl existing = customerTblRepo.findByReference(txtReference);
+        if (existing != null) {
+            customerTblRepo.delete(existing);
+            return true;
+        }
+        return false;
     }
 }

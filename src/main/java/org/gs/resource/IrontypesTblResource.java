@@ -10,6 +10,7 @@ import org.gs.service.IrontypesTblService;
 import org.gs.util.constants.APIPaths;
 import org.gs.util.constants.Msgs;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Path(APIPaths.IRON_TYPES)
@@ -74,5 +75,23 @@ public class IrontypesTblResource {
     public List<IrontypesTbl> listAll(@QueryParam("limit") @DefaultValue("50") int limit,
                                       @QueryParam("page") @DefaultValue("1") int page) {
         return service.listAll(limit, page);
+    }
+    @GET
+    @Path("/findByPrice")
+    public List<IrontypesTbl> listByPrice(@QueryParam("from") @DefaultValue("0") BigDecimal from,@QueryParam("to") @DefaultValue("100") BigDecimal to, @QueryParam("limit") @DefaultValue("50") int limit,
+                                          @QueryParam("page") @DefaultValue("1") int page) {
+        return service.searchbyPrice(from,to,limit, page);
+    }
+
+    @DELETE
+    @Path("/{txtReference}")
+    public Response delete(@PathParam("txtReference") String txtReference) {
+        boolean deleted = service.deleteByReference(txtReference);
+        if (deleted) {
+            return Response.ok(new org.gs.dto.Response(Msgs.DELETED_SUCCESS)).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new org.gs.dto.Response(Msgs.REFERENCE_NOT_FOUND)).build();
+        }
     }
 }
