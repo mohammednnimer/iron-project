@@ -29,13 +29,17 @@ public class IrontypesTbl {
     @Column(name = "dbl_price", precision = 10, scale = 5)
     private BigDecimal dblPrice;
 
+
+
     public String getTxtKey() {
         return txtKey;
     }
 
+
     public void setTxtKey(String txtKey) {
         this.txtKey = txtKey;
     }
+
 
     public String getTxtDescription() {
         return txtDescription;

@@ -70,6 +70,14 @@ public class IronshapesService {
 
 
 
+    public byte[] getImage(String reference)
+    {
+
+        return ironshapesTblRepo.findByReference(reference).getImgImage();
+
+    }
+
+
 
 
 

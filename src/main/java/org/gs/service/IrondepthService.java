@@ -4,16 +4,15 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.gs.entity.IrondepthTbl;
-import org.gs.entity.IronshapesTbl;
-import org.gs.entity.IrontypesTbl;
+
 import org.gs.repository.IrondepthTblRepo;
 
 import java.util.List;
+
 import java.util.UUID;
 
 @ApplicationScoped
 public class IrondepthService {
-
     @Inject
     IrondepthTblRepo irondepthTblRepo;
 
@@ -27,7 +26,6 @@ public class IrondepthService {
         if (iron.getTxtKey() == null || iron.getTxtKey().isBlank()) {
             iron.setTxtKey(UUID.randomUUID().toString().substring(0, 30));
         }
-
         irondepthTblRepo.persist(iron);
         return true;
     }
@@ -41,8 +39,7 @@ public class IrondepthService {
         return irondepthTblRepo.findByPartOfReference(txtReference);
     }
 
-    public List<IrondepthTbl> search(String GenralSearch, int limit , int page)
-    {
+    public List<IrondepthTbl> search(String GenralSearch, int limit , int page) {
         return irondepthTblRepo.search(GenralSearch,limit,page);
     }
 

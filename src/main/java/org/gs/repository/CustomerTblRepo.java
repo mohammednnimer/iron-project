@@ -11,9 +11,9 @@ import java.util.List;
 @ApplicationScoped
 public class CustomerTblRepo implements PanacheRepository<CustomerTbl> {
 
-//    public CustomerTbl findById(String txtKey) {
-//        return find("txtKey = ?1", txtKey).firstResult();
-//    }
+    public CustomerTbl findById(String txtKey) {
+        return find("txtKey = ?1", txtKey).firstResult();
+    }
 
     public List<CustomerTbl> findByName(String txtName) {
         return find("LOWER(txtName) LIKE ?1", "%" + txtName.toLowerCase() + "%").list();

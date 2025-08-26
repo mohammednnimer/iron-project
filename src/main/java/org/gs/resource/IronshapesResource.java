@@ -21,13 +21,24 @@ public class IronshapesResource {
 
     @POST
     public Response create(IronshapesTbl iron) {
+
+
         boolean created = ironshapesService.create(iron);
+
         if (created) {
             return Response.status(Response.Status.CREATED).entity(iron).build();
         } else {
             return Response.status(Response.Status.CONFLICT)
                     .entity(new org.gs.dto.Response(Msgs.REFERENCE_EXISTS)).build();
         }
+    }
+
+    @GET
+    @Path("/getImageByReference/{Reference}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response getImageByReference(@PathParam("Reference") String reference) {
+
+        return Response.ok().entity(ironshapesService.getImage(reference)).build();
     }
 
     @PUT

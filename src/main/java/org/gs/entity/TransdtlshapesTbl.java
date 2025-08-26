@@ -21,6 +21,7 @@ public class TransdtlshapesTbl {
     @Column(name = "txt_shapekey", length = 60)
     private String txtShapekey;
 
+
     @Column(name = "txt_sideslist", length = 600)
     private String txtSideslist;
 

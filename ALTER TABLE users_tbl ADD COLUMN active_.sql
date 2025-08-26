@@ -16,6 +16,8 @@ CREATE TABLE logs_tbl (
     status_code VARCHAR(10));
 
 
+ALTER TABLE ironshapes_tbl RENAME COLUMN "IMG_IMAGE" TO img_image;
+
 
 
 

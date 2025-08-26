@@ -27,6 +27,7 @@ public class CustomerTbl {
     @Column(name = "txt_reference", length = 30)
     private String txtReference;
 
+
     @Column(name = "txt_test")
     private String txtTest;
 

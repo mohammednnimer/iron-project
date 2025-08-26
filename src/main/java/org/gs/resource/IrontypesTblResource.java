@@ -58,7 +58,6 @@ public class IrontypesTblResource {
         }
         return Response.ok(customer).build();
     }
-
     @GET
     @Path(APIPaths.BY_REFERENCE+"{txtReference}")
     public Response getByReference(@PathParam("txtReference") String txtReference) {
@@ -70,7 +69,6 @@ public class IrontypesTblResource {
         }
         return Response.ok(iron).build();
     }
-
     @GET
     public List<IrontypesTbl> listAll(@QueryParam("limit") @DefaultValue("50") int limit,
                                       @QueryParam("page") @DefaultValue("1") int page) {

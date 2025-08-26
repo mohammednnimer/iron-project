@@ -71,7 +71,7 @@ public class AuthResource {
         loginService.updateUserToken(user, token);
 
         String expiresAt = Instant.now().plusSeconds(172800).toString(); // 48 hours
-        return Response.ok(new LoginResponse(token, expiresAt,Msgs.SUCCESS, role)).build();
+        return Response.ok(new LoginResponse(token, expiresAt,Msgs.SUCCESS, user.getIntLevel())).build();
     }
 
     @POST

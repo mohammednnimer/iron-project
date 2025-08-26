@@ -1,71 +1,46 @@
-package org.gs.entity;
+package org.gs.dto;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "transdtl_tbl")
-    public class TransdtlTbl {
-    @Id
-    @Column(name = "txt_key", length = 60)
-    private String txtKey;
+public class Trans {
 
-    @Column(name = "txt_hdrkey", length = 60)
-    private String txtHdrkey;
 
-        @Column(name = "txt_stockcode", length = 60)
-        private String txtStockcode;
+    Transshapes transshapes;
 
-    @Column(name = "txt_irontype", length = 60)
-    private String txtIrontype;
+
+     private String txtStockcode;
+
+     private String txtIrontype;
 
 
 
-    @Column(name = "dbl_ironlength", precision = 10, scale = 5)
     private BigDecimal dblIronlength;
 
-    @Column(name = "dbl_qty", precision = 10, scale = 5)
     private BigDecimal dblQty;
 
-    @Column(name = "dbl_price", precision = 10, scale = 5)
     private BigDecimal dblPrice;
 
-    @Column(name = "dbl_total", precision = 10, scale = 5)
     private BigDecimal dblTotal;
 
-    @Column(name = "txt_reference", length = 30)
     private String txtReference;
 
-    @Column(name = "dbl_totalweight", precision = 10, scale = 5)
     private BigDecimal dblTotalweight;
 
-    @Column(name = "txt_irondepthley", length = 60)
-    private String txtIrondepthley;
+     private String txtIrondepthley;
 
-    @Column(name = "txt_irondepthkey", length = 60)
     private String txtIrondepthkey;
 
-    @Column(name = "int_type", precision = 5)
     private BigDecimal intType;
 
-    public String getTxtKey() {
-        return txtKey;
+    public Transshapes getTransshapes() {
+        return transshapes;
     }
 
-    public void setTxtKey(String txtKey) {
-        this.txtKey = txtKey;
-    }
-
-    public String getTxtHdrkey() {
-        return txtHdrkey;
-    }
-
-    public void setTxtHdrkey(String txtHdrkey) {
-        this.txtHdrkey = txtHdrkey;
+    public void setTransshapes(Transshapes transshapes) {
+        this.transshapes = transshapes;
     }
 
     public String getTxtStockcode() {
@@ -155,5 +130,4 @@ import java.math.BigDecimal;
     public void setIntType(BigDecimal intType) {
         this.intType = intType;
     }
-
 }
