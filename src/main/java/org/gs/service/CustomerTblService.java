@@ -18,9 +18,9 @@ public class CustomerTblService {
     CustomerTblRepo customerTblRepo;
     @Transactional
     public boolean add(CustomerTbl customer) {
-        if (customerTblRepo.findByReference(customer.getTxtReference()) != null) {
-            return false;
-        }
+//        if (customerTblRepo.findByReference(customer.getTxtReference()) != null) {
+//            return false;
+//        }
         customer.setTxtKey(UUID.randomUUID().toString());
         customerTblRepo.persist(customer);
         return true;
@@ -45,8 +45,8 @@ public class CustomerTblService {
     public List<CustomerTbl> searchByTxtName(String txtName) {
         return customerTblRepo.findByName(txtName);
     }
-    public List<CustomerTbl> searchByTxtRefrences(String txtKey) {
-        return customerTblRepo.findByPartOfReference(txtKey);
+    public CustomerTbl searchByTxtRefrences(String txtKey) {
+        return customerTblRepo.findByReference(txtKey);
     }
 
     public List<CustomerTbl> listAll( int limit ,  int page) {

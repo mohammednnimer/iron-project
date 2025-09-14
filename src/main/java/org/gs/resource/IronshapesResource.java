@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.gs.entity.IrondepthTbl;
 import org.gs.entity.IronshapesTbl;
 import org.gs.service.IronshapesService;
 import org.gs.util.constants.APIPaths;
@@ -59,9 +60,9 @@ public class IronshapesResource {
     }
 
     @GET
-    @Path("/{txtReference}")
-    public Response getByReference(@PathParam("txtReference") String txtReference) {
-        List<IronshapesTbl> iron = ironshapesService.getByReference(txtReference);
+    @Path("/getByReference")
+    public Response getByReference(@QueryParam("txtReference") String txtReference) {
+       IronshapesTbl iron = ironshapesService.getByReference(txtReference);
         if (iron != null) {
             return Response.ok(iron).build();
         } else {
@@ -69,6 +70,18 @@ public class IronshapesResource {
                     .entity(new org.gs.dto.Response(Msgs.NOT_FOUND)).build();
         }
     }
+
+    @GET
+    @Path("/getByKey")
+    public Response searchByKey(@QueryParam("txtKey") String txtKey) {
+        IronshapesTbl ironshapesTbl = ironshapesService.searchByTxtKey(txtKey);
+        if (ironshapesTbl == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new org.gs.dto.Response(Msgs.CUSTOMER_NOT_FOUND)).build();
+        }
+        return Response.ok(ironshapesTbl).build();
+    }
+
 
     @GET
     @Path(APIPaths.GENERAL_SEARCH)

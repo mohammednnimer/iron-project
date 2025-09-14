@@ -1,7 +1,10 @@
 
 ALTER TABLE users_tbl ADD COLUMN active_token TEXT;
 
+
+
 ALTER TABLE users_tbl ADD COLUMN user_status BOOLEAN DEFAULT FALSE;
+update users_tbl set user_status =false
 
 
 

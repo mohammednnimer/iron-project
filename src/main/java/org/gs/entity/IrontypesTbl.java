@@ -17,16 +17,16 @@ public class IrontypesTbl {
     @Column(name = "txt_description", length = 300)
     private String txtDescription;
 
-    @Column(name = "int_num", precision = 5)
+    @Column(name = "int_num")
     private BigDecimal intNum;
 
-    @Column(name = "dbl_weightpergram", precision = 10, scale = 5)
+    @Column(name = "dbl_weightpergram")
     private BigDecimal dblWeightpergram;
 
     @Column(name = "txt_reference", length = 50)
     private String txtReference;
 
-    @Column(name = "dbl_price", precision = 10, scale = 5)
+    @Column(name = "dbl_price")
     private BigDecimal dblPrice;
 
 

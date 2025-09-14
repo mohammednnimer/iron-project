@@ -17,13 +17,13 @@ public class ItemtypesTbl {
     @Column(name = "txt_description", length = 300)
     private String txtDescription;
 
-    @Column(name = "dbl_price", precision = 10, scale = 5)
+    @Column(name = "dbl_price")
     private BigDecimal dblPrice;
 
     @Column(name = "txt_reference", length = 30)
     private String txtReference;
 
-    @Column(name = "int_systemtype", precision = 5)
+    @Column(name = "int_systemtype")
     private BigDecimal intSystemtype;
 
     public String getTxtKey() {

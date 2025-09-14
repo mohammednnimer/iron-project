@@ -5,6 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.gs.dto.IronTypes;
+import org.gs.entity.IronshapesTbl;
 import org.gs.entity.IrontypesTbl;
 import org.gs.service.IrontypesTblService;
 import org.gs.util.constants.APIPaths;
@@ -59,9 +60,9 @@ public class IrontypesTblResource {
         return Response.ok(customer).build();
     }
     @GET
-    @Path(APIPaths.BY_REFERENCE+"{txtReference}")
-    public Response getByReference(@PathParam("txtReference") String txtReference) {
-        List<IrontypesTbl> iron = service.searchByrefrences(txtReference);
+    @Path("/getByReference")
+    public Response getByReference(@QueryParam("txtReference") String txtReference) {
+        IrontypesTbl iron = service.searchByrefrences(txtReference);
         if (iron == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new org.gs.dto.Response(Msgs.NOT_FOUND))
@@ -69,6 +70,17 @@ public class IrontypesTblResource {
         }
         return Response.ok(iron).build();
     }
+    @GET
+    @Path("/getByKey")
+    public Response searchByKey(@QueryParam("txtKey") String txtKey) {
+        IrontypesTbl irontypesTbl = service.searchByTxtKey(txtKey);
+        if (irontypesTbl == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new org.gs.dto.Response(Msgs.CUSTOMER_NOT_FOUND)).build();
+        }
+        return Response.ok(irontypesTbl).build();
+    }
+
     @GET
     public List<IrontypesTbl> listAll(@QueryParam("limit") @DefaultValue("50") int limit,
                                       @QueryParam("page") @DefaultValue("1") int page) {

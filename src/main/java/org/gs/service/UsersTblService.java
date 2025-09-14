@@ -30,11 +30,10 @@ public class UsersTblService {
     public boolean create(String name, String password, BigDecimal level) {
        UsersTbl userisexist =usersTblRepo.getUser(name);
         if (userisexist!=null) {
-
             return false ;
         }
         UsersTbl user =new UsersTbl();
-        user.setTxtCode(UUID.randomUUID().toString().substring(0,30));
+        user.setTxtCode(name.toUpperCase());
         user.setTxtName(name);
         user.setTxtPwd(password);
         user.setUserStatus(false);
@@ -42,8 +41,6 @@ public class UsersTblService {
         usersTblRepo.persist(user);
         return true;
     }
-
-
     public List<UsersTbl> Search(String name,int limit,int page)
     {
         return usersTblRepo.findByName(name,limit,page);
@@ -56,19 +53,12 @@ public class UsersTblService {
         if (dto.getOldPassword().equals(dto.getNewPassword())) {
              return "New password cannot be the same as old password";
         }
-
-
         if (user==null) {
             return "sorry there not user that have this user name and password";
         }
         user.setTxtPwd(dto.getNewPassword());
         return "Updated succeeded";
     }
-
-
-
-
-
     @Transactional
     public String updatePasswordByAdmin(UpdatePasswordByAdmin dto) {
         UsersTbl user = usersTblRepo.getUser(dto.getUsername());
@@ -78,13 +68,23 @@ public class UsersTblService {
         user.setTxtPwd(dto.getNewPassword());
         return "Updated succeeded";
     }
+    @Transactional
+    public String updateRole(String userName,BigDecimal newRole) {
+        UsersTbl user = usersTblRepo.getUser(userName);
+        if (user==null) {
+            return "sorry there not user that have this user name and password";
+        }
+        user.setIntLevel(newRole);
+
+        return "Updated succeeded";
+    }
 
 
 
 
     @Transactional
-    public boolean delete(String username,String password) {
-      return usersTblRepo.deleteUser(username,password);
+    public boolean delete(String username) {
+      return usersTblRepo.deleteUser(username);
     }
     public UsersTbl findByUsernameAndPassword(String username, String password) {
         return usersTblRepo.findByUsernameAndPassword(username,password);

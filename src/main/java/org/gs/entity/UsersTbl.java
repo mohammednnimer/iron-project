@@ -36,6 +36,14 @@ public class UsersTbl {
     @Column(name = "user_status")
     private Boolean userStatus;
 
+
+
+
+    public Boolean getUserStatus() {
+        return userStatus;
+    }
+
+
     public Boolean  isUserStatus() {
             return userStatus;
         }

@@ -4,6 +4,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.gs.entity.CustomerTbl;
 import org.gs.entity.IrondepthTbl;
 import org.gs.service.IrondepthService;
 import org.gs.util.constants.APIPaths;
@@ -51,15 +52,29 @@ public class IrondepthResource {
     }
 
     @GET
-    @Path("/{txtReference}")
-    public Response getByReference(@PathParam("txtReference") String txtReference) {
-        List<IrondepthTbl> iron = irondepthService.getByReference(txtReference);
+    @Path("/getByReference")
+    public Response getByReference(@QueryParam("txtReference") String txtReference) {
+        IrondepthTbl iron = irondepthService.getByReference(txtReference);
         if (iron == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(new org.gs.dto.Response(Msgs.NOT_FOUND)).build();
         }
         return Response.ok(iron).build();
     }
+
+
+    @GET
+    @Path("/getByKey")
+    public Response searchByKey(@QueryParam("txtKey") String txtKey) {
+        IrondepthTbl irondepthTbl = irondepthService.searchByTxtKey(txtKey);
+        if (irondepthTbl == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new org.gs.dto.Response(Msgs.CUSTOMER_NOT_FOUND)).build();
+        }
+        return Response.ok(irondepthTbl).build();
+    }
+
+
 
     @PUT
     public Response update(IrondepthTbl iron) {

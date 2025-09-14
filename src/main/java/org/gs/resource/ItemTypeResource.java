@@ -66,9 +66,9 @@ public class ItemTypeResource {
     }
 
      @GET
-    @Path("/search/reference")
-    public Response searchByReferences(@QueryParam("txtKey") String txtKey) {
-         List<ItemtypesTbl> iron = service.searchByrefrences(txtKey);
+    @Path("/getByReference")
+    public Response searchByReferences(@QueryParam("reference") String txtKey) {
+         ItemtypesTbl iron = service.searchByrefrences(txtKey);
          if (iron == null) {
              return Response.status(Response.Status.NOT_FOUND)
                      .entity(new org.gs.dto.Response(Msgs.NOT_FOUND))
@@ -76,6 +76,17 @@ public class ItemTypeResource {
          }
          return Response.ok(iron).build();
      }
+
+    @GET
+    @Path("/getByKey")
+    public Response searchByKey(@QueryParam("txtKey") String txtKey) {
+        ItemtypesTbl itemtypesTbl = service.searchByTxtKey(txtKey);
+        if (itemtypesTbl == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity(new org.gs.dto.Response(Msgs.CUSTOMER_NOT_FOUND)).build();
+        }
+        return Response.ok(itemtypesTbl).build();
+    }
 
     @GET
     @Path("/generalSearch")

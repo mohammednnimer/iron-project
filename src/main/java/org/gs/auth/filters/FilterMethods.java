@@ -16,6 +16,7 @@ public class FilterMethods {
     @Inject
     UsersTblRepo userRepository;
 
+
     private final String[] PUBLIC_PATHS = {
             "/auth/login",
             "/health",

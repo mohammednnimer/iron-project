@@ -16,6 +16,12 @@ public class IrondepthTblRepo implements PanacheRepository<IrondepthTbl> {
 
     }
 
+
+
+    public IrondepthTbl findByKey(String txtKey) {
+        return find("LOWER(txtKey) = ?1", txtKey.toLowerCase()).firstResult();
+    }
+
     public IrondepthTbl findByReference(String txtReference) {
         return find("LOWER(txtReference) = ?1", txtReference.toLowerCase()).firstResult();
     }

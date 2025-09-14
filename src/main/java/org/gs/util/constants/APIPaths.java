@@ -5,6 +5,7 @@ public interface APIPaths {
     String USERS = "/users";
     String UPDATE_PASSWORD = "/updatePassword";
     String UPDATE_PASSWORD_BY_ADMIN="/updatePasswordByAdmin";
+    String UPDATER_Role="/updateRole";
     // Iron Types
     String IRON_TYPES = "/ironTypes";
     String GENERAL_SEARCH = "/generalSearch";

@@ -16,7 +16,6 @@ public class Trans {
      private String txtIrontype;
 
 
-
     private BigDecimal dblIronlength;
 
     private BigDecimal dblQty;
@@ -29,7 +28,8 @@ public class Trans {
 
     private BigDecimal dblTotalweight;
 
-     private String txtIrondepthley;
+     private String txtItemKey;
+
 
     private String txtIrondepthkey;
 
@@ -107,12 +107,12 @@ public class Trans {
         this.dblTotalweight = dblTotalweight;
     }
 
-    public String getTxtIrondepthley() {
-        return txtIrondepthley;
+    public String getTxtItemKey() {
+        return txtItemKey;
     }
 
-    public void setTxtIrondepthley(String txtIrondepthley) {
-        this.txtIrondepthley = txtIrondepthley;
+    public void setTxtItemKey(String txtItemKey) {
+        this.txtItemKey = txtItemKey;
     }
 
     public String getTxtIrondepthkey() {

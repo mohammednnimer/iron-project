@@ -25,10 +25,10 @@ public class TransdtlshapesTbl {
     @Column(name = "txt_sideslist", length = 600)
     private String txtSideslist;
 
-    @Column(name = "int_sides", precision = 5)
+    @Column(name = "int_sides")
     private BigDecimal intSides;
 
-    @Column(name = "dbl_totlength", precision = 10, scale = 5)
+    @Column(name = "dbl_totlength")
     private BigDecimal dblTotlength;
 
     public String getTxtKey() {

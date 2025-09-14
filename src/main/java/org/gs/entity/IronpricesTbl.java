@@ -18,13 +18,13 @@ public class IronpricesTbl {
     @Column(name = "txt_custkey", length = 60)
     private String txtCustkey;
 
-    @Column(name = "txt_irontypekey", length = 60)
+    @Column(name = "txt_irontypekey")
     private String txtIrontypekey;
 
-    @Column(name = "txt_irontypename", length = 200)
+    @Column(name = "txt_irontypename")
     private String txtIrontypename;
 
-    @Column(name = "dbl_price", precision = 10, scale = 5)
+    @Column(name = "dbl_price")
     private BigDecimal dblPrice;
 
     @Column(name = "dat_date")

@@ -29,6 +29,18 @@ public class TransactionResource {
 
     }
 
+
+    @GET
+    @Path("getTransactionByOrderNumber")
+    public Response getTransaction(@QueryParam("orderNumber")  int orderNumber )
+    {
+
+
+        return Response.ok().entity(transHdrService.getTransaction(orderNumber)).build();
+
+
+    }
+
     @POST
     @Path("/search")
     public Response getTransaction(@QueryParam("limit") @DefaultValue("50") int limit ,@QueryParam("page")@DefaultValue("1") int page,TransactionFiltering transactionFiltering)
@@ -43,7 +55,7 @@ public class TransactionResource {
         return  Response.ok(transHdrService.getALl(limit,page)).build();
     }
 
-    @Path("/iron")
+    @Path("/calculate")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import org.gs.dto.IronTypes;
 import org.gs.entity.CustomerTbl;
+import org.gs.entity.IrondepthTbl;
 import org.gs.entity.IronshapesTbl;
 import org.gs.entity.IrontypesTbl;
 import org.gs.repository.IronshapesTblRepo;
@@ -48,8 +49,8 @@ public class IronshapesService {
     public List<IronshapesTbl> getAll(int limit, int page) {
         return ironshapesTblRepo.GetAllUser(limit, page);
     }
-    public List<IronshapesTbl> getByReference(String txtReference) {
-        return ironshapesTblRepo.findByPartOfReference(txtReference);
+    public IronshapesTbl getByReference(String txtReference) {
+        return ironshapesTblRepo.findByReference(txtReference);
     }
 
     public List<IronshapesTbl> search(String GenralSearch, int limit , int page)
@@ -67,6 +68,9 @@ public class IronshapesService {
         return false;
     }
 
+    public IronshapesTbl searchByTxtKey(String txtKey) {
+        return ironshapesTblRepo.findByKey(txtKey);
+    }
 
 
 

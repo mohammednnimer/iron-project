@@ -1,10 +1,12 @@
 package org.gs.resource;
 
 import io.smallrye.openapi.internal.models.AbstractPathItem;
+import io.vertx.ext.web.Session;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.gs.auth.session.SessionManager;
 import org.gs.dto.UpdatePassword;
 import org.gs.dto.UpdatePasswordByAdmin;
 import org.gs.entity.UsersTbl;
@@ -26,10 +28,10 @@ public class UsersTblResource {
 
 
 
+
     @GET
     public Response getAlluser(@QueryParam("limit") @DefaultValue("50") int limit ,@QueryParam("page")@DefaultValue("1") int page)
     {
-
         return  Response.ok(usersTblService.getALlUser(limit,page)).build();
     }
     @GET
@@ -71,19 +73,30 @@ public class UsersTblResource {
         }
         return Response.status(Response.Status.BAD_REQUEST).entity(new org.gs.dto.Response(result)).build();
     }
+    @PUT
+    @Path(APIPaths.UPDATER_Role)
+public Response updateRole(@QueryParam("userName")  String username ,@QueryParam("newRole")  BigDecimal newRole) {
+        String result = usersTblService.updateRole(username,newRole);
+        if (result.toLowerCase().contains("succeeded")) {
+            return Response.ok(new org.gs.dto.Response(result)).build();
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity(new org.gs.dto.Response(result)).build();
+    }
 
 
 
 
 
     @DELETE
-    public Response deleteUser(@QueryParam("username") String username,
-                               @QueryParam("password") String password) {
-        if(usersTblService.delete(username, password)){
+    public Response deleteUser(@QueryParam("username") String username) {
+        if(usersTblService.delete(username)){
             return Response.ok(new org.gs.dto.Response(Msgs.USER_DELETED)).build();
         }
         return Response.ok(new org.gs.dto.Response(Msgs.USER_NOT_FOUND)).build();
     }
+
+
+
 
 
 

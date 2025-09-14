@@ -12,19 +12,24 @@ public class UsersTblRepo implements PanacheRepository<UsersTbl> {
 
     public List<UsersTbl> GetAllUser(int limit, int page) {
         int offset = (page-1) * limit;
-        return find("userStatus = false ").range(offset,offset+ limit - 1).list();
+        return find("userStatus = false").range(offset,offset+ limit - 1).list();
     }
 
     public UsersTbl getUser(String name) {
-        return find("txtName = ?1", name).firstResult();
+        return find("LOWER(txtName) = ?1 and userStatus = false ", name.toLowerCase()).firstResult();
     }
 
-     public boolean deleteUser(String name, String password) {
-        return delete("txtName = ?1 AND txtPwd = ?2", name, password) > 0;
+     public boolean deleteUser(String name) {
+         UsersTbl user = getUser(name);
+         if(user != null) {
+             user.setUserStatus(true);
+             return true;
+         }
+         return false;
     }
 
     public UsersTbl getUserByToken(String token ) {
-        return find("activeToken = ?1", token).firstResult();
+        return find("activeToken = ?1 and userStatus = false", token).firstResult();
     }
 
     public UsersTbl findByUsername(String username) {
@@ -39,10 +44,8 @@ public class UsersTblRepo implements PanacheRepository<UsersTbl> {
     }
 
 
-
-
     public UsersTbl findByUsernameAndPassword(String username, String password) {
-        return find("txtName = ?1 and txtPwd = ?2 and userStatus = false", username, password).firstResult();
+        return find("txtCode = ?1 and txtPwd = ?2 and userStatus = false", username, password).firstResult();
     }
 
     public UsersTbl findByUserCode(String userCode) {

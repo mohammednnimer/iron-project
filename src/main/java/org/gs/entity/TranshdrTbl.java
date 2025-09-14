@@ -16,7 +16,7 @@ public class TranshdrTbl {
     @Column(name = "txt_key", length = 60)
     private String txtKey;
 
-    @Column(name = "int_vouchernum", precision = 5)
+    @Column(name = "int_vouchernum")
     private BigDecimal intVouchernum;
 
     @Column(name = "txt_reference", length = 30)
@@ -40,7 +40,7 @@ public class TranshdrTbl {
     @Column(name = "txt_usercode", length = 30)
     private String txtUsercode;
 
-    @Column(name = "dbl_total", precision = 10, scale = 5)
+    @Column(name = "dbl_total")
     private BigDecimal dblTotal;
 
     @Column(name = "dat_createddate")

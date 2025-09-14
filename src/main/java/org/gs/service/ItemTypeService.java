@@ -65,9 +65,14 @@ public class ItemTypeService {
 
 
 
-    public List<ItemtypesTbl> searchByrefrences(String txtKey) {
-        return repo.findBypartofReference(txtKey);
+    public ItemtypesTbl searchByrefrences(String txtKey) {
+        return repo.findByReference(txtKey);
     }
+
+    public ItemtypesTbl searchByTxtKey(String txtKey) {
+        return repo.findByKey(txtKey);
+    }
+
 
     public List<ItemtypesTbl> search(String GenralSearch, int limit , int page)
     {

@@ -2,10 +2,7 @@ package org.gs.repository;
 
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.gs.entity.CustomerTbl;
-import org.gs.entity.IronshapesTbl;
-import org.gs.entity.IrontypesTbl;
-import org.gs.entity.UsersTbl;
+import org.gs.entity.*;
 
 import java.util.List;
 
@@ -21,6 +18,10 @@ public class IronshapesTblRepo implements PanacheRepository<IronshapesTbl> {
         return find("txtReference ",  txtReference ).firstResult();
     }
 
+
+    public IronshapesTbl findByKey(String txtKey) {
+        return find("LOWER(txtKey) = ?1", txtKey.toLowerCase()).firstResult();
+    }
 
     public List<IronshapesTbl> findByPartOfReference(String txtReference) {
         return find("LOWER(txtReference) LIKE ?1", "%" + txtReference.toLowerCase() + "%").list();

@@ -14,13 +14,14 @@ public class IrondepthTbl {
     @Column(name = "txt_key", length = 60)
     private String txtKey;
 
-    @Column(name = "txt_description", length = 300)
+    @Column(name = "txt_description")
     private String txtDescription;
 
-    @Column(name = "dbl_weight", precision = 10, scale = 5)
+    //, precision = 10, scale = 10
+    @Column(name = "dbl_weight")
     private BigDecimal dblWeight;
 
-    @Column(name = "txt_reference", length = 50)
+    @Column(name = "txt_reference")
     private String txtReference;
 
     public String getTxtKey() {

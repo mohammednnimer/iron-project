@@ -3,6 +3,7 @@ package org.gs.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.gs.entity.CustomerTbl;
 import org.gs.entity.IrondepthTbl;
 
 import org.gs.repository.IrondepthTblRepo;
@@ -35,9 +36,14 @@ public class IrondepthService {
         return irondepthTblRepo.findAll().range(offset, offset + limit - 1).list();
     }
 
-    public List<IrondepthTbl> getByReference(String txtReference) {
-        return irondepthTblRepo.findByPartOfReference(txtReference);
+    public IrondepthTbl getByReference(String txtReference) {
+        return irondepthTblRepo.findByReference(txtReference);
     }
+
+    public IrondepthTbl searchByTxtKey(String txtKey) {
+        return irondepthTblRepo.findByKey(txtKey);
+    }
+
 
     public List<IrondepthTbl> search(String GenralSearch, int limit , int page) {
         return irondepthTblRepo.search(GenralSearch,limit,page);

@@ -26,6 +26,15 @@ public class TranshdrTblRepo implements PanacheRepository<TranshdrTbl> {
     }
 
 
+
+    public TranshdrTbl findByOrderNumber( int Vouchernum ) {
+
+
+
+        return  find("intVouchernum = ?1", BigDecimal.valueOf(Vouchernum)).firstResult();
+
+    }
+
     public TranshdrTbl updateStatus( int Vouchernum , int status) {
 
 

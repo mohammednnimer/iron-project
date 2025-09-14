@@ -25,22 +25,22 @@ import java.math.BigDecimal;
 
 
 
-    @Column(name = "dbl_ironlength", precision = 10, scale = 5)
+    @Column(name = "dbl_ironlength")
     private BigDecimal dblIronlength;
 
-    @Column(name = "dbl_qty", precision = 10, scale = 5)
+    @Column(name = "dbl_qty")
     private BigDecimal dblQty;
 
-    @Column(name = "dbl_price", precision = 10, scale = 5)
+    @Column(name = "dbl_price")
     private BigDecimal dblPrice;
 
-    @Column(name = "dbl_total", precision = 10, scale = 5)
+    @Column(name = "dbl_total")
     private BigDecimal dblTotal;
 
     @Column(name = "txt_reference", length = 30)
     private String txtReference;
 
-    @Column(name = "dbl_totalweight", precision = 10, scale = 5)
+    @Column(name = "dbl_totalweight")
     private BigDecimal dblTotalweight;
 
     @Column(name = "txt_irondepthley", length = 60)
@@ -49,7 +49,7 @@ import java.math.BigDecimal;
     @Column(name = "txt_irondepthkey", length = 60)
     private String txtIrondepthkey;
 
-    @Column(name = "int_type", precision = 5)
+    @Column(name = "int_type")
     private BigDecimal intType;
 
     public String getTxtKey() {

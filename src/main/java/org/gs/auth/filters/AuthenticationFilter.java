@@ -1,5 +1,6 @@
 package org.gs.auth.filters;
 
+import com.google.gson.Gson;
 import io.vertx.core.http.HttpServerRequest;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -8,9 +9,13 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.container.ContainerResponseContext;
 import jakarta.ws.rs.container.ContainerResponseFilter;
+import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
+import org.gs.auth.session.SessionManager;
 import org.gs.entity.Logs;
+import org.gs.repository.CustomerTblRepo;
 import org.gs.repository.LogsRepo;
+import org.gs.repository.UsersTblRepo;
 import org.gs.util.constants.ErrorCodes;
 import org.gs.util.constants.Msgs;
 import org.gs.exception.UnAuthRequestException;
@@ -39,8 +44,14 @@ public class AuthenticationFilter implements ContainerRequestFilter, ContainerRe
     HttpServerRequest httpRequest;
 
     @Inject
+    UsersTblRepo usersTblRepo;
+
+    @Inject
     LogsRepo logsRepo;
 
+
+    @Inject
+    SessionManager sessionManager;
     @Override
     public void filter(ContainerRequestContext requestContext) {
         long startTime = System.currentTimeMillis();
@@ -49,16 +60,26 @@ public class AuthenticationFilter implements ContainerRequestFilter, ContainerRe
         Logs logs = createLogEntry(requestContext);
         requestContext.setProperty(LOG_OBJECT_PROPERTY, logs);
 
-//        String authorizationHeader = requestContext.getHeaderString("Authorization");
-//        String path = requestContext.getUriInfo().getPath();
-//        boolean isPathPublic = filterMethods.isPathPublic(path);
-//
-//        String jwt = extractJwtToken(authorizationHeader);
-        //filterMethods.isTokenValid(jwt, isPathPublic);
-        boolean isTokenValid = true;
+        String authorizationHeader = requestContext.getHeaderString("Authorization");
+        String path = requestContext.getUriInfo().getPath();
+        boolean isPathPublic = filterMethods.isPathPublic(path);
+
+        String jwt = extractJwtToken(authorizationHeader);
+
+
+        boolean isTokenValid =  filterMethods.isTokenValid(jwt, isPathPublic);
 
         if (!isTokenValid) {
-            throw new UnAuthRequestException(Msgs.INVALID_TOKEN, ErrorCodes.INVALID_TOKEN_CODE);
+            System.out.println("1111");
+            Response response = Response
+                    .status(Response.Status.UNAUTHORIZED) // 401
+                    .entity("{\"message\":\"INVALID_TOKEN\",\"errorCode\":\"INVALID_TOKEN_CODE\"}")
+                    .build();
+
+            requestContext.abortWith(response);
+
+       //     throw new UnAuthRequestException(Msgs.INVALID_TOKEN, ErrorCodes.INVALID_TOKEN_CODE);
+
         }
     }
 

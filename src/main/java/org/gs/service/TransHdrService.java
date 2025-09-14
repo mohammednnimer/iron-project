@@ -3,10 +3,14 @@ package org.gs.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import org.gs.dto.Trans;
 import org.gs.dto.TransactionFiltering;
+import org.gs.dto.TransactionRequest;
 import org.gs.dto.Transactions;
+import org.gs.entity.TransdtlTbl;
 import org.gs.entity.TranshdrTbl;
 import org.gs.mapper.TransactionMapper;
+import org.gs.repository.TransdtlRepository;
 import org.gs.repository.TranshdrTblRepo;
 
 import java.math.BigDecimal;
@@ -16,6 +20,8 @@ import java.util.List;
 @ApplicationScoped
 public class TransHdrService {
 
+    @Inject
+    TransdtlRepository transdtlRepository;
 
     @Inject
     TranshdrTblRepo transhdrTblRepo;
@@ -41,6 +47,39 @@ public class TransHdrService {
         }
         return transResponses;
     }
+
+    @Inject
+    TransactionMapper transactionMapper;
+
+    public TransactionRequest getTransaction(int number)
+    {
+
+        TranshdrTbl transhdrTbl=transhdrTblRepo.findByOrderNumber(number);
+
+     //   TransactionMapper transactionMapper=new TransactionMapper();
+
+
+
+        List<TransdtlTbl> transdtlTbls=transdtlRepository.findByHeaderKey(transhdrTbl.getTxtKey());
+
+        List<Trans> transdto=new ArrayList<>();
+
+
+        for(TransdtlTbl transdtlTbl:transdtlTbls)
+        {
+            transdto.add(transactionMapper.toDto(transdtlTbl));
+        }
+
+        TransactionRequest transactionRequest=new TransactionRequest();
+        transactionRequest.setHeader(transhdrTbl);
+        transactionRequest.setTransactions(transdto);
+
+
+        return transactionRequest;
+
+    }
+
+
 
 
     @Transactional

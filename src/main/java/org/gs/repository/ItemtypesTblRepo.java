@@ -12,7 +12,11 @@ import java.util.List;
 public class ItemtypesTblRepo implements PanacheRepository<ItemtypesTbl> {
         public ItemtypesTbl findByReference(String txtReference) {
         return find("txtReference ",  txtReference ).firstResult();
+       }
+    public ItemtypesTbl findByKey(String key) {
+        return find("txtKey ",  key ).firstResult();
     }
+
         public List<ItemtypesTbl> findBypartofReference(String txtReference) {
         return find("txtReference LIKE ?1", "%" + txtReference + "%").list();
     }

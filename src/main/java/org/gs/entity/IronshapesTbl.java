@@ -19,7 +19,7 @@ public class IronshapesTbl {
     private byte[] imgImage;
 
 
-    @Column(name = "INT_SIDES", precision = 5, scale = 0)
+    @Column(name = "INT_SIDES")
     private BigDecimal intSides;
 
     @Column(name = "TXT_IRONKEY", length = 60)

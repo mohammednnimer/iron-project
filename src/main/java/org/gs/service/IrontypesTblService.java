@@ -65,8 +65,8 @@ public class IrontypesTblService {
 
 
 
-    public List<IrontypesTbl> searchByrefrences(String txtKey) {
-        return repo.findBypartofReference(txtKey);
+    public IrontypesTbl searchByrefrences(String txtKey) {
+        return repo.findByReference(txtKey);
     }
 
     public List<IrontypesTbl> search(String GenralSearch, int limit , int page)
@@ -78,6 +78,9 @@ public class IrontypesTblService {
         return repo.findbyprice(from,to,limit,page);
     }
 
+    public IrontypesTbl searchByTxtKey(String txtKey) {
+        return repo.findByKey(txtKey);
+    }
 
 
 

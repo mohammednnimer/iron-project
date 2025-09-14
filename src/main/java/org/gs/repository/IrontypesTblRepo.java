@@ -16,6 +16,9 @@ public class IrontypesTblRepo implements PanacheRepository<IrontypesTbl> {
     public IrontypesTbl findByReference(String txtReference) {
         return find("txtReference ",  txtReference ).firstResult();
     }
+    public IrontypesTbl findByKey(String txtKey) {
+        return find("LOWER(txtKey) = ?1", txtKey.toLowerCase()).firstResult();
+    }
 
     public List<IrontypesTbl> findBypartofReference(String txtReference) {
         return find("txtReference LIKE ?1", "%" + txtReference + "%").list();
