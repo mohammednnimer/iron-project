@@ -45,6 +45,9 @@ public class UsersTblService {
     {
         return usersTblRepo.findByName(name,limit,page);
     }
+    public Integer NumberofRecords() {
+        return usersTblRepo.listAll().size();
+    }
 
     @Transactional
     public String updatePassword(UpdatePassword dto) {

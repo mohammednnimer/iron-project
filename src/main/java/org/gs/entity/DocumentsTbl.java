@@ -18,8 +18,10 @@ public class DocumentsTbl {
     @Column(name = "txt_hdrkey", length = 60)
     private String txtHdrkey;
 
+
     @Column(name = "txt_filename", length = 300)
     private String txtFilename;
+
 
     @Column(name = "txt_description", length = 100)
     private String txtDescription;

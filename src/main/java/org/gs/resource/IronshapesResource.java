@@ -84,6 +84,12 @@ public class IronshapesResource {
 
 
     @GET
+    @Path("/numberOfRecords")
+    public Response searchByKey() {
+
+        return Response.ok().entity(new org.gs.dto.Response(ironshapesService.NumberofRecords()+"")).build();
+    }
+    @GET
     @Path(APIPaths.GENERAL_SEARCH)
     public Response searchByGeneralInput(@QueryParam("generalInput") String generalInput,
                                          @QueryParam("limit") @DefaultValue("50") int limit,

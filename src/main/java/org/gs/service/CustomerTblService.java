@@ -41,7 +41,9 @@ public class CustomerTblService {
         if (updatedCustomer.getTxtEmail() != null) existing.setTxtEmail(updatedCustomer.getTxtEmail());
         return true;
     }
-
+    public Integer NumberofRecords() {
+        return customerTblRepo.listAll().size();
+    }
     public List<CustomerTbl> searchByTxtName(String txtName) {
         return customerTblRepo.findByName(txtName);
     }

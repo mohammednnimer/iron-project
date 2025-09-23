@@ -15,6 +15,7 @@ public class CustomerTblRepo implements PanacheRepository<CustomerTbl> {
         return find("txtKey = ?1", txtKey).firstResult();
     }
 
+
     public List<CustomerTbl> findByName(String txtName) {
         return find("LOWER(txtName) LIKE ?1", "%" + txtName.toLowerCase() + "%").list();
     }

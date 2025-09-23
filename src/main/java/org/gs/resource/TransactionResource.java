@@ -5,6 +5,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.gs.dto.*;
+import org.gs.reports.ReprotService;
 import org.gs.service.IronCalculator;
 import org.gs.service.TransHdrService;
 import org.gs.service.TransactionService;
@@ -20,11 +21,16 @@ public class TransactionResource {
     @Inject
     TransHdrService transHdrService;
 
+    @Inject
+    ReprotService reprotService;
+
     @POST
     public Response create(TransactionRequest transactionRequest)
     {
-      String m=   transactionServicel.createTransaction(transactionRequest);
 
+   transactionServicel.createTransaction(transactionRequest);
+
+        reprotService.documentsReport(transactionRequest);
         return Response.ok().build();
 
     }

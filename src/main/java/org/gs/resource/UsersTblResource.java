@@ -27,6 +27,12 @@ public class UsersTblResource {
 
 
 
+    @GET
+    @Path("/numberOfRecords")
+    public Response searchByKey() {
+
+        return Response.ok().entity(new org.gs.dto.Response(usersTblService.NumberofRecords()+"")).build();
+    }
 
 
     @GET

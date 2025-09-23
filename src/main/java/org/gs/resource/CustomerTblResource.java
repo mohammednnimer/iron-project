@@ -69,6 +69,23 @@ public class CustomerTblResource {
         return Response.ok(customer).build();
     }
 
+    @GET
+    @Path("/numberOfRecords")
+    public Response searchByKey() {
+
+        return Response.ok().entity(new org.gs.dto.Response(customerService.NumberofRecords()+"")).build();
+    }
+
+
+
+
+
+
+
+
+
+
+
     @Inject
     CustomerTblRepo customerRepo;
 

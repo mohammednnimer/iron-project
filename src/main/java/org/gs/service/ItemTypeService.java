@@ -63,6 +63,9 @@ public class ItemTypeService {
         return false;
     }
 
+    public Integer NumberofRecords() {
+        return repo.listAll().size();
+    }
 
 
     public ItemtypesTbl searchByrefrences(String txtKey) {

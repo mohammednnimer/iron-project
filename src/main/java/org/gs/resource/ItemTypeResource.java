@@ -22,6 +22,14 @@ public class ItemTypeResource {
     @Inject
     ItemTypeService service;
 
+
+    @GET
+    @Path("/numberOfRecords")
+    public Response searchByKey() {
+
+        return Response.ok().entity(new org.gs.dto.Response(service.NumberofRecords()+"")).build();
+    }
+
     @POST
     public Response create(@Valid ItemtypesTbl item) {
         boolean saved = service.create(item);

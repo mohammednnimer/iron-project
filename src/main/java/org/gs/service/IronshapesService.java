@@ -72,6 +72,9 @@ public class IronshapesService {
         return ironshapesTblRepo.findByKey(txtKey);
     }
 
+    public Integer NumberofRecords() {
+        return ironshapesTblRepo.listAll().size();
+    }
 
 
     public byte[] getImage(String reference)

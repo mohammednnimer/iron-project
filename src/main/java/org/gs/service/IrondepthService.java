@@ -44,6 +44,9 @@ public class IrondepthService {
         return irondepthTblRepo.findByKey(txtKey);
     }
 
+    public Integer NumberofRecords() {
+        return irondepthTblRepo.listAll().size();
+    }
 
     public List<IrondepthTbl> search(String GenralSearch, int limit , int page) {
         return irondepthTblRepo.search(GenralSearch,limit,page);

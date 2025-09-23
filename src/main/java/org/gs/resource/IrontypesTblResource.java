@@ -70,6 +70,14 @@ public class IrontypesTblResource {
         }
         return Response.ok(iron).build();
     }
+
+    @GET
+    @Path("/numberOfRecords")
+    public Response searchByKey() {
+
+        return Response.ok().entity(new org.gs.dto.Response(service.NumberofRecords()+"")).build();
+    }
+
     @GET
     @Path("/getByKey")
     public Response searchByKey(@QueryParam("txtKey") String txtKey) {

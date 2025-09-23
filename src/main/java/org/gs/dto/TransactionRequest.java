@@ -1,10 +1,12 @@
 package org.gs.dto;
 
 
+import org.gs.entity.DocumentsTbl;
 import org.gs.entity.TransdtlshapesTbl;
 import org.gs.entity.TranshdrTbl;
 import org.gs.entity.TransdtlTbl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionRequest {

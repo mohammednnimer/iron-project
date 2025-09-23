@@ -4,13 +4,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.Id;
 import jakarta.transaction.Transactional;
+import org.gs.dto.DocumentDto;
 import org.gs.dto.Trans;
 import org.gs.dto.TransactionRequest;
 import org.gs.dto.Transshapes;
-import org.gs.entity.CustomerTbl;
-import org.gs.entity.TransdtlshapesTbl;
-import org.gs.entity.TranshdrTbl;
-import org.gs.entity.TransdtlTbl;
+import org.gs.entity.*;
 import org.gs.repository.*;
 
 import java.math.BigDecimal;
@@ -45,6 +43,9 @@ public class TransactionService {
     @Inject
     ItemtypesTblRepo itemtypesTblRepo;
 
+    @Inject
+    DocumentsTblRepo documentsTblRepo;
+
     @Transactional
     public String createTransaction(TransactionRequest request) {
 
@@ -76,6 +77,9 @@ public class TransactionService {
         }
         header.setIntStatus(BigDecimal.valueOf(1));
         BigDecimal sum = BigDecimal.valueOf(0);
+
+
+
         for (Trans detail : details) {
             if(detail.getIntType()==BigDecimal.valueOf(0)) {
                 TransdtlTbl transdtlTbl = new TransdtlTbl();
@@ -130,7 +134,6 @@ public class TransactionService {
 
             }
             else{
-
                 TransdtlTbl transdtlTbl = new TransdtlTbl();
                 transdtlTbl.setTxtKey(UUID.randomUUID().toString());
                 transdtlTbl.setIntType(BigDecimal.valueOf(1));
@@ -141,7 +144,6 @@ public class TransactionService {
                 transdtlTbl.setDblTotalweight(detail.getDblTotal() != null ? detail.getDblPrice() : BigDecimal.ZERO);
                 transdtlRepository.persist(transdtlTbl);
             }
-
         }
         header.setDblTotal(sum);
         transhdrRepository.persist(header);

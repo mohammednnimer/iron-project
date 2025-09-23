@@ -32,6 +32,12 @@ public class IrondepthResource {
     }
 
     @GET
+    @Path("/numberOfRecords")
+    public Response searchByKey() {
+
+        return Response.ok().entity(new org.gs.dto.Response(irondepthService.NumberofRecords()+"")).build();
+    }
+    @GET
     public Response getAll(@QueryParam("limit") @DefaultValue("50") int limit,
                            @QueryParam("page") @DefaultValue("1") int page) {
         List<IrondepthTbl> list = irondepthService.getAll(limit, page);

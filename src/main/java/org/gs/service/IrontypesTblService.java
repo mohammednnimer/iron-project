@@ -81,6 +81,9 @@ public class IrontypesTblService {
     public IrontypesTbl searchByTxtKey(String txtKey) {
         return repo.findByKey(txtKey);
     }
+    public Integer NumberofRecords() {
+        return repo.listAll().size();
+    }
 
 
 
